@@ -1,0 +1,22 @@
+name: "dummy"
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/dummy_file.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dummy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: dummy convert
+        uses: docker://pandoc/latex:3.1
+        with:
+          args: --output=out.pdf ./LICENSE
